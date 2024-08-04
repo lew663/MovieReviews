@@ -53,6 +53,8 @@
 
 -------------------------
 
+## ERD
+
 ![화면 캡처 2024-08-04 134152](https://github.com/user-attachments/assets/9032d3f8-c23f-49bc-8b7f-53c319502cc9)
 
 
