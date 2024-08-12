@@ -1,4 +1,4 @@
-package com.board.movie.user.domain.entity;
+package com.board.movie.user.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

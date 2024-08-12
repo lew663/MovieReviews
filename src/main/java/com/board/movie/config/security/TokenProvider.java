@@ -1,4 +1,4 @@
-package com.board.movie.user.config.security;
+package com.board.movie.config.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

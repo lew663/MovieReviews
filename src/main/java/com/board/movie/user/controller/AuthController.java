@@ -1,9 +1,10 @@
 package com.board.movie.user.controller;
 
-import com.board.movie.user.config.security.TokenProvider;
-import com.board.movie.user.domain.entity.UserEntity;
+import com.board.movie.config.security.TokenProvider;
 import com.board.movie.user.dto.AuthDTO;
+import com.board.movie.user.entity.UserEntity;
 import com.board.movie.user.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,13 @@ public class AuthController {
   private final AuthService authService;
   private final TokenProvider tokenProvider;
 
+  /**
+   * 회원가입
+   * @param user AuthDTO 의 내부클래스(SignUp)
+   * @return 사용자의 정보, 응답
+   */
   @PostMapping("/signup")
-  public ResponseEntity<UserEntity> signUp(@RequestBody AuthDTO.SignUp user) {
+  public ResponseEntity<UserEntity> signUp(@Valid @RequestBody AuthDTO.SignUp user) {
     try {
       UserEntity userEntity = authService.signUp(user);
       return ResponseEntity.ok(userEntity);
@@ -32,6 +38,11 @@ public class AuthController {
     }
   }
 
+  /**
+   * 사용자 로그인
+   * @param user AuthDTO 의 내부클래스(SignIn)
+   * @return JWT 토큰과 사용자의 정보(Map), 응답
+   */
   @PostMapping("/signin")
   public ResponseEntity<?> signIn(@RequestBody AuthDTO.SignIn user) {
     try {
