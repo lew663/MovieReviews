@@ -5,6 +5,7 @@ import com.board.movie.user.entity.UserEntity;
 import com.board.movie.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,17 +30,19 @@ public class UserService {
    * @param user UserDTO 에 있는 UpdateUser 내부클래스
    * @return 수정된 사용자 정보
    */
+  @Transactional
   public UserEntity updateUser(String userId, UserDTO.UpdateUser user) {
     UserEntity userEntity = getUserById(userId);
     userEntity.setUserNickname(user.getUserNickname());
     userEntity.setUserPhone(user.getUserPhone());
-    return userRepository.save(userEntity);
+    return userEntity;
   }
 
   /**
    * 사용자 삭제(탈퇴)
    * @param userId 사용자 아이디(이메일)
    */
+  @Transactional
   public void deleteUser(String userId) {
     UserEntity userEntity = getUserById(userId);
     userRepository.delete(userEntity);

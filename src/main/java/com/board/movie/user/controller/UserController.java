@@ -3,6 +3,7 @@ package com.board.movie.user.controller;
 import com.board.movie.user.dto.UserDTO;
 import com.board.movie.user.entity.UserEntity;
 import com.board.movie.user.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public class UserController {
    */
   @PostMapping("/{userId}")
   public ResponseEntity<UserEntity> updateUser(
-      @PathVariable String userId, @RequestBody UserDTO.UpdateUser user) {
+      @PathVariable String userId, @RequestBody @Valid UserDTO.UpdateUser user) {
     UserEntity userEntity = userService.updateUser(userId, user);
     return ResponseEntity.ok(userEntity);
   }
