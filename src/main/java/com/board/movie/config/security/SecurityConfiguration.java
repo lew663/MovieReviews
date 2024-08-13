@@ -1,4 +1,4 @@
-package com.board.movie.user.config.security;
+package com.board.movie.config.security;
 
 import com.board.movie.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

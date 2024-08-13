@@ -1,4 +1,4 @@
-package com.board.movie.user.domain.entity;
+package com.board.movie.user.entity;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -25,8 +25,6 @@ public class UserEntity extends BaseEntity {
 
   @ElementCollection
   private List<String> roles;
-
-
 
 }
 

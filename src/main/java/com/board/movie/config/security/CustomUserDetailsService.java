@@ -1,6 +1,6 @@
-package com.board.movie.user.config.security;
+package com.board.movie.config.security;
 
-import com.board.movie.user.domain.entity.UserEntity;
+import com.board.movie.user.entity.UserEntity;
 import com.board.movie.user.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

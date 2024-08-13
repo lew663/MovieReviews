@@ -1,4 +1,4 @@
-package com.board.movie.user.config.security;
+package com.board.movie.config.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
