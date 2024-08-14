@@ -3,6 +3,7 @@ package com.board.movie.user.entity;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
+@Table(name = "user_entity")
 public class UserEntity extends BaseEntity {
 
   @Id
@@ -22,9 +24,9 @@ public class UserEntity extends BaseEntity {
   private String userNickname;
   private String userName;
   private String userPhone;
+  private String resetToken;
 
   @ElementCollection
   private List<String> roles;
-
 }
 

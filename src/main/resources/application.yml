@@ -11,4 +11,13 @@ spring:
       ddl-auto: update
   jwt:
     secret: emVyb2Jhc2Utc3ByaW5nLWJvb3QtcHJvamVjdC1qd3Qtc2VjcmV0LWtleQo=
-
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: eunulee03@gmail.com
+    password: caffbdsabeyqtawr
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true

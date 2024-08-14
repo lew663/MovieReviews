@@ -53,4 +53,21 @@ public class AuthDTO {
           .build();
     }
   }
+
+  @Data
+  public static class PasswordResetRequest {
+    @NotBlank(message = "이메일은 Null 또는 공백일 수 없습니다.")
+    @Email(message = "올바른 이메일 형식을 입력해주세요.")
+    private String userId;
+  }
+
+  @Data
+  public static class PasswordReset {
+    @NotBlank
+    private String token;
+
+    @NotBlank(message = "비밀번호는 Null 또는 공백일 수 없습니다.")
+    @Size(min = 8, max = 15, message = "비밀번호는 8~15자 사이여야 합니다.")
+    private String newPassword;
+  }
 }

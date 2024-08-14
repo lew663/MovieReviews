@@ -17,5 +17,4 @@ public class UserDTO {
     @Pattern(regexp = "^\\d{10,11}$", message = "유효한 전화번호를 입력해주세요 (숫자 10~11자리).")
     private String userPhone;
   }
-
 }

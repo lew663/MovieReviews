@@ -1,4 +1,4 @@
-package com.board.movie.user.controller;
+package com.board.movie.user.dto;
 
 import com.board.movie.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
