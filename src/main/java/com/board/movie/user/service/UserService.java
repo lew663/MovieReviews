@@ -1,5 +1,7 @@
 package com.board.movie.user.service;
 
+import com.board.movie.exception.CustomException;
+import com.board.movie.exception.ErrorCode;
 import com.board.movie.user.dto.UserDTO;
 import com.board.movie.user.entity.UserEntity;
 import com.board.movie.user.repository.UserRepository;
@@ -21,7 +23,7 @@ public class UserService {
    */
   public UserEntity getUserById(String userId) {
     return userRepository.findByUserId(userId)
-        .orElseThrow(() -> new RuntimeException("User not found"));
+        .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
   }
 
   /**

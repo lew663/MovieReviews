@@ -18,7 +18,7 @@ public class EmailService {
    */
   public void sendPasswordResetEmail(String userId, String resetToken) {
     SimpleMailMessage email = new SimpleMailMessage();
-    String resetLink = "http://localhost:8080/reset-password?token=?" + resetToken;
+    String resetLink = "http://localhost:8080/reset-password?token=" + resetToken;
     String subject = "비밀번호 초기화 메일입니다.";
     String text = "링크를 클릭하셔서 비밀번호를 초기화 해주세요\n" + resetLink;
 
@@ -28,8 +28,9 @@ public class EmailService {
 
     try {
       javaMailSender.send(email);
-    }catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
+      throw new RuntimeException("이메일 발송에 실패했습니다.");
     }
   }
 }

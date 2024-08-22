@@ -1,18 +1,18 @@
 package com.board.movie.user.dto;
 
-import com.board.movie.config.security.Authority;
+import com.board.movie.user.entity.Role;
 import com.board.movie.user.entity.UserEntity;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 public class AuthDTO {
 
   @Data
-  public static class SignIn {
+  public static class Login {
     @NotBlank(message = "이메일은 Null 또는 공백일 수 없습니다.")
     @Email(message = "올바른 이메일 형식을 입력해주세요.")
     private String userId;
@@ -43,13 +43,15 @@ public class AuthDTO {
     private String userPhone;
 
     public UserEntity toEntity() {
+      Role userRole = new Role();
+      userRole.setRoleName("ROLE_USER");
       return UserEntity.builder()
           .userId(this.userId)
           .userPassword(this.userPassword)
           .userNickname(this.userNickname)
           .userName(this.userName)
           .userPhone(this.userPhone)
-          .roles(List.of(Authority.ROLE_USER.getRoleName()))
+          .roles(Set.of(userRole))
           .build();
     }
   }

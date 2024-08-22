@@ -30,11 +30,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-	implementation 'io.jsonwebtoken:jjwt:0.9.1'  // JWT 라이브러리
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-gson:0.11.5'
+
 	implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.3.2'
-    compileOnly 'org.projectlombok:lombok'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.3.2'
+	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'  // MariaDB JDBC 드라이버
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

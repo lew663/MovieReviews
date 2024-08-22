@@ -8,7 +8,7 @@ import lombok.Data;
 public class UserDTO {
 
   @Data
-  public static class UpdateUser{
+  public static class UpdateUser {
 
     @NotBlank(message = "닉네임은 Null 또는 공백일 수 없습니다.")
     private String userNickname;

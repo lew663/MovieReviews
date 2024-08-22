@@ -1,20 +1,18 @@
 package com.board.movie.user.entity;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
 @Entity
 @NoArgsConstructor
-@Builder
 @AllArgsConstructor
+@Builder
+@Data
 @Table(name = "user_entity")
+@EqualsAndHashCode(callSuper = true)
 public class UserEntity extends BaseEntity {
 
   @Id
@@ -26,7 +24,8 @@ public class UserEntity extends BaseEntity {
   private String userPhone;
   private String resetToken;
 
-  @ElementCollection
-  private List<String> roles;
+  @ManyToMany
+  private Set<Role> roles;
+
 }
 
