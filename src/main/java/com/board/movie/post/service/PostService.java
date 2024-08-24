@@ -79,7 +79,7 @@ public class PostService {
     PostEntity postEntity = postRepository.findById(postId)
         .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
 
-    // 작성자 확인
+    // 게시글을 작성한 유저가 맞는지 확인
     Optional<PostEntity> post = postRepository.findByPostIdAndUser(postId, user);
     if (post.isEmpty()) {
       throw new CustomException(ErrorCode.NOT_WRITER);
@@ -95,6 +95,7 @@ public class PostService {
     return ApiResult.ok(responseDTO);
   }
 
+  // 게시글 삭제
   public ApiResultDTO<SuccessResponse> deletePost(Long postId, UserEntity user) {
 
     // 게시글 조회

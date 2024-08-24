@@ -18,6 +18,7 @@ public enum ErrorCode {
   EXPIRED_AUTH_TOKEN(UNAUTHORIZED, "인증 토큰이 만료되었습니다"),
   USER_NOT_FOUND(NOT_FOUND, "사용자를 찾을 수 없습니다"),
   POST_NOT_FOUND(NOT_FOUND, "게시글를 찾을 수 없습니다"),
+  COMMENT_NOT_FOUND(NOT_FOUND, "댓글를 찾을 수 없습니다"),
   MEMBER_NOT_FOUND(NOT_FOUND, "해당 유저 정보를 찾을 수 없습니다"), // 비밀번호 재설정 요청
   DUPLICATE_USERID(CONFLICT, "데이터가 이미 존재합니다"); // 회원가입
 

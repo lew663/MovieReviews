@@ -18,13 +18,13 @@ public class PostResponseDTO {
   private LocalDateTime updatedDt;
 
   public PostResponseDTO(PostEntity postEntity) {
-    this.postId = postEntity.getPostId(); // 엔티티의 ID 필드에서 postId로 매핑
-    this.postTitle = postEntity.getPostTitle(); // 엔티티의 title 필드에서 postTitle로 매핑
-    this.postMovieTitle = postEntity.getPostMovieTitle(); // 엔티티의 movieTitle 필드에서 postMovieTitle로 매핑
-    this.postContents = postEntity.getPostContent(); // 엔티티의 contents 필드에서 postContents로 매핑
-    this.userId = postEntity.getUser().getUserId(); // 엔티티의 userId 필드에서 userId로 매핑
-    this.createdDt = postEntity.getPostCreated(); // 엔티티의 createdAt 필드에서 createdDt로 매핑
-    this.updatedDt = postEntity.getPostUpdated(); // 엔티티의 updatedAt 필드에서 updatedDt로 매핑
+    this.postId = postEntity.getPostId();
+    this.postTitle = postEntity.getPostTitle();
+    this.postMovieTitle = postEntity.getPostMovieTitle();
+    this.postContents = postEntity.getPostContent();
+    this.userId = postEntity.getUser().getUserId();
+    this.createdDt = postEntity.getPostCreated();
+    this.updatedDt = postEntity.getPostUpdated();
   }
 
 }

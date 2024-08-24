@@ -1,4 +1,4 @@
-package com.board.movie.email.service;
+package com.board.movie.user.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
