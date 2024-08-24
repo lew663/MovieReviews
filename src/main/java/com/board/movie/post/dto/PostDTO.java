@@ -47,6 +47,7 @@ public class PostDTO {
     @NotBlank(message = "게시글 내용은 Null 또는 공백일 수 없습니다.")
     @Size(max = 5000, message = "게시글 내용은 최대 5000자까지 입력 가능합니다.")
     private String postContent;
+
   }
 
 }

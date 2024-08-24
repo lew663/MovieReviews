@@ -17,9 +17,9 @@ public class BaseEntity {
 
   @CreationTimestamp
   @Column(updatable = false)
-  private LocalDateTime userCreated;
+  private LocalDateTime postCreated;
 
   @UpdateTimestamp
   @Column(insertable = false)
-  private LocalDateTime userUpdated;
+  private LocalDateTime postUpdated;
 }

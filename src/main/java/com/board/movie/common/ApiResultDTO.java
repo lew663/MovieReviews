@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 public class ApiResultDTO<T> {
 
-  private boolean success;
-  private T response;
-  private ErrorResponse error;
+  private final boolean success;
+  private final T response;
+  private final ErrorResponse error;
 
   @Builder
   private ApiResultDTO(boolean success, T response, ErrorResponse error) {

@@ -2,14 +2,14 @@ package com.board.movie.post.entity;
 
 import com.board.movie.user.entity.UserEntity;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "post_entity")
 public class PostEntity extends BaseEntity {
 

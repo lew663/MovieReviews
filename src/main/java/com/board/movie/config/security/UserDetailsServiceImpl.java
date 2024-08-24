@@ -10,20 +10,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
   private final UserRepository userRepository;
 
-  public CustomUserDetailsService(UserRepository userRepository) {
+  public UserDetailsServiceImpl(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
 
   @Override
+  @Transactional
   public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
     UserEntity user = userRepository.findByUserId(userId)
         .orElseThrow(() ->  new CustomException(ErrorCode.USER_NOT_FOUND)); // 사용자가 DB에 없으면 예외발생
@@ -32,6 +34,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         .map(role -> new SimpleGrantedAuthority(role.getRoleName())) // 역할 이름을 SimpleGrantedAuthority로 변환
         .collect(Collectors.toList());
 
-    return new CustomUserDetails(user);
+    return new UserDetailsImpl(user);
   }
 }

@@ -19,7 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
-  private final CustomUserDetailsService customUserDetailsService;
   private final TokenProvider tokenProvider;
 
   @Bean
@@ -41,8 +40,10 @@ public class SecurityConfiguration {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers("/api/posts/**").permitAll()
             .requestMatchers("/api/post/**").hasRole("USER")
-            .anyRequest().permitAll()
+            .anyRequest().authenticated()
         )
         .csrf(csrf -> csrf.disable())
         .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

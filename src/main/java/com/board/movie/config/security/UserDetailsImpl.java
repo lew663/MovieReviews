@@ -1,6 +1,7 @@
 package com.board.movie.config.security;
 
 import com.board.movie.user.entity.UserEntity;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,12 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class CustomUserDetails implements UserDetails {
+@Getter
+public class UserDetailsImpl implements UserDetails {
 
   private final UserEntity user;
 
   // 인증 완료 된 사용자 추가
-  public CustomUserDetails(UserEntity user) {
+  public UserDetailsImpl(UserEntity user) {
     this.user = user;
   }
 
@@ -22,10 +24,6 @@ public class CustomUserDetails implements UserDetails {
     return user.getRoles().stream()
         .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
         .collect(Collectors.toList());
-  }
-
-  public UserEntity getUser() {
-    return user;
   }
 
   @Override

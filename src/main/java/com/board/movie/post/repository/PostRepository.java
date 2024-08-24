@@ -10,12 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface PostRepository extends JpaRepository<PostEntity, Long> {
-  // 특정 사용자 ID로 게시글 조회
-  List<PostEntity> findByUserUserId(String userId);
 
-  // 특정 영화 제목으로 게시글 조회
-  List<PostEntity> findByPostMovieTitleContaining(String movieTitle);
+  // 전체 게시글 조회 (내림차순)
+  List<PostEntity> findAllByOrderByPostUpdatedDesc(); // postEntity의 게시물 수정 시간을 기준으로 내림차순
 
-  // 게시글 수정시 사용자정보 확인
   Optional<PostEntity> findByPostIdAndUser(Long postId, UserEntity user);
 }

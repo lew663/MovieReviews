@@ -2,8 +2,8 @@ package com.board.movie.user.service;
 
 import com.board.movie.common.ApiResult;
 import com.board.movie.common.ApiResultDTO;
-import com.board.movie.common.SuccessResponse;
 import com.board.movie.config.jwt.TokenProvider;
+import com.board.movie.config.security.UserDetailsImpl;
 import com.board.movie.email.service.EmailService;
 import com.board.movie.exception.CustomException;
 import com.board.movie.exception.ErrorCode;
@@ -143,4 +143,5 @@ public class AuthService {
     user.setResetToken(null); // 사용 후 토큰 제거
     userRepository.save(user);
   }
+
 }
