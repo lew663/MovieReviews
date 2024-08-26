@@ -8,20 +8,15 @@ import lombok.Setter;
 @Getter
 public class UserResponseDTO {
 
-  @Getter
-  @Setter
-  public static class UserInfo {
+  private String userId;
+  private String userNickname;
+  private String userName;
+  private String userPhone;
 
-    private String userId;
-    private String userNickname;
-    private String userName;
-    private String userPhone;
-
-    public UserInfo(UserEntity userEntity) {
-      this.userId = userEntity.getUserId();
-      this.userNickname = userEntity.getUserNickname();
-      this.userName = userEntity.getUserName();
-      this.userPhone = userEntity.getUserPhone();
-    }
+  public UserResponseDTO(UserEntity userEntity) {
+    this.userId = userEntity.getUserId();
+    this.userNickname = userEntity.getUserNickname();
+    this.userName = userEntity.getUserName();
+    this.userPhone = userEntity.getUserPhone();
   }
 }
