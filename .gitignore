@@ -4,6 +4,7 @@ build/
 gradlew
 gradlew.bat
 settings.gradle
+build.gradle
 *.log
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
@@ -37,7 +38,4 @@ out/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
-.vscode/
-
-application.yml
+src/main/resources/application.yml
