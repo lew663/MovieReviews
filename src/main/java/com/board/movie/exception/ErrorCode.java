@@ -21,7 +21,8 @@ public enum ErrorCode {
   COMMENT_NOT_FOUND(NOT_FOUND, "댓글를 찾을 수 없습니다"),
   MEMBER_NOT_FOUND(NOT_FOUND, "해당 유저 정보를 찾을 수 없습니다"),
   DUPLICATE_USERID(CONFLICT, "데이터가 이미 존재합니다"),
-  UNAUTHORIZED_ACCESS(UNAUTHORIZED, "유효하지 않은 인증 토큰입니다");
+  UNAUTHORIZED_ACCESS(UNAUTHORIZED, "유효하지 않은 인증 토큰입니다"),
+  SCRAP_NOT_FOUND(NOT_FOUND, "스크랩이 존재 하지 않습니다.");
 
   private final HttpStatus httpStatus;
   private final String detail;

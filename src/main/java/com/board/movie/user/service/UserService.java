@@ -54,18 +54,4 @@ public class UserService {
     UserResponseDTO userInfo = new UserResponseDTO(userEntity);
     return ApiResult.ok(userInfo);
   }
-
-  public ApiResultDTO<SuccessResponse> deleteUser() {
-
-    // 현재 인증된 사용자 정보 가져오기
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String username = authentication.getName();
-
-    if (!userRepository.existsById(username)) {
-      throw new CustomException(ErrorCode.USER_NOT_FOUND);
-    }
-
-    userRepository.deleteById(username);
-    return ApiResult.ok(SuccessResponse.of(HttpStatus.OK, "회원 탈퇴 성공"));
-  }
 }

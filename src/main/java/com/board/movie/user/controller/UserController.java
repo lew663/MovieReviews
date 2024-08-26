@@ -26,9 +26,4 @@ public class UserController {
   public ApiResultDTO<UserResponseDTO> updateUser(@Valid @RequestBody UserRequestDTO.UpdateUser userDTO) {
     return userService.updateUser(userDTO);
   }
-
-  @DeleteMapping("/delete")
-  public ApiResultDTO<SuccessResponse> deleteUser() {
-    return userService.deleteUser();
-  }
 }
