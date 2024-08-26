@@ -1,11 +1,12 @@
 package com.board.movie.post.service;
 
+import com.board.movie.comment.entity.CommentEntity;
 import com.board.movie.common.ApiResult;
 import com.board.movie.common.ApiResultDTO;
 import com.board.movie.common.SuccessResponse;
 import com.board.movie.exception.CustomException;
 import com.board.movie.exception.ErrorCode;
-import com.board.movie.post.dto.PostDTO;
+import com.board.movie.post.dto.PostRequestDTO;
 import com.board.movie.post.dto.PostResponseDTO;
 import com.board.movie.post.entity.PostEntity;
 import com.board.movie.post.repository.PostRepository;
@@ -16,10 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -30,50 +29,36 @@ public class PostService {
 
   // 전체 게시글 조회
   @Transactional
-  public ApiResultDTO<List<PostResponseDTO>> listPosts() {
-      List<PostEntity> postList = postRepository.findAllByOrderByPostUpdatedDesc();
-      if (postList == null || postList.isEmpty()) {
-        return ApiResult.ok(Collections.emptyList());
-      }
-      List<PostResponseDTO> postResponseDTOList = new ArrayList<>();
-      for (PostEntity postEntity : postList) {
-        PostResponseDTO postResponseDTO = new PostResponseDTO(postEntity);
-        postResponseDTOList.add(postResponseDTO);
-      }
-      return ApiResult.ok(postResponseDTOList);
+  public ApiResultDTO<List<PostResponseDTO.listPosts>> listPosts() {
+
+    List<PostEntity> postList = postRepository.findAllByOrderByPostUpdatedDesc();    // postEntity 의 게시물 수정 시간을 기준으로 내림차순으로 조회
+
+    // 게시물이 하나도 없을 경우
+    if (postList == null || postList.isEmpty()) {
+      return ApiResult.ok(Collections.emptyList());
+    }
+
+    List<PostResponseDTO.listPosts> postResponseDTOList = new ArrayList<>();
+    for (PostEntity postEntity : postList) {
+      PostResponseDTO.listPosts postResponseDTO = new PostResponseDTO.listPosts(postEntity);
+      postResponseDTOList.add(postResponseDTO);
+    }
+    return ApiResult.ok(postResponseDTOList);
   }
 
   // 게시글 작성
   @Transactional
-  public ApiResultDTO<PostResponseDTO> createPost(PostDTO.CreatePost postDto, UserEntity user) {
-    try {
-      // 게시글 엔티티 생성
+  public ApiResultDTO<PostResponseDTO> createPost(PostRequestDTO.CreatePost postDto, UserEntity user) {
+
       PostEntity postEntity = postDto.toEntity(user);
-
-      // 게시글 저장
       PostEntity savedPostEntity = postRepository.save(postEntity);
-
-      // PostResponseDTO 생성
-      PostResponseDTO postResponseDTO = new PostResponseDTO(
-          savedPostEntity.getPostId(),
-          savedPostEntity.getPostTitle(),
-          savedPostEntity.getPostMovieTitle(),
-          savedPostEntity.getPostContent(),
-          savedPostEntity.getUser().getUserId(),
-          savedPostEntity.getPostCreated(),
-          savedPostEntity.getPostUpdated()
-      );
-
-      // 성공 응답 반환
+      PostResponseDTO postResponseDTO = new PostResponseDTO(savedPostEntity);
       return ApiResult.ok(postResponseDTO);
-    } catch (Exception e) {
-      log.error("게시글 작성중 오류 발생: " + e);
-      throw new CustomException(ErrorCode.INVALID_REQUEST_DATA);
-    }
   }
+
   // 게시글 수정
   @Transactional
-  public ApiResultDTO<PostResponseDTO> updatePost(Long postId, PostDTO.UpdatePost postDto, UserEntity user) {
+  public ApiResultDTO<PostResponseDTO> updatePost(Long postId, PostRequestDTO.UpdatePost postDto, UserEntity user) {
 
     // 게시글 조회
     PostEntity postEntity = postRepository.findById(postId)
@@ -110,5 +95,29 @@ public class PostService {
 
     postRepository.delete(postEntity);
     return ApiResult.ok(SuccessResponse.of(HttpStatus.OK, "게시물 삭제 성공"));
+  }
+
+  // 선택한 게시물 조회
+  @Transactional
+  public ApiResultDTO<PostResponseDTO> getPost(Long postId) {
+    // 게시글 조회
+    PostEntity postEntity = postRepository.findById(postId)
+        .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
+
+    // 댓글 작성일자 기준으로 내림차순 정렬
+    List<CommentEntity> comments = postEntity.getCommentList();
+    if (comments != null) {
+      comments.sort(Comparator.comparing(
+          CommentEntity::getCommentUpdated,
+          Comparator.nullsLast(Comparator.naturalOrder())
+      ).reversed());
+    }
+
+    // 조회수 증가
+    postEntity.incrementViewCount();
+
+    PostResponseDTO responseDTO = new PostResponseDTO(postEntity);
+
+    return ApiResult.ok(responseDTO);
   }
 }

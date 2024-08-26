@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.Set;
 
 @RequiredArgsConstructor
-public class AuthDTO {
+public class AuthRequestDTO {
 
   @Data
   public static class Login {

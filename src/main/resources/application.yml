@@ -9,16 +9,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: eunulee03@gmail.com
-    password: caffbdsabeyqtawr
-    properties:
-      mail:
-        smtp:
-          starttls:
-            enable: true
   jwt:
     secret: emVyb2Jhc2UtcHJvamVjdC1tb3ZpZS1ib2FyZC1qd3Qtc2VjcmV0LWtleS1zcHJpbmctYm9vdC1qd3Qtc2VjcmV0LWtleQo=
 

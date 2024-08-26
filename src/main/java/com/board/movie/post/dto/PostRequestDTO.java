@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class PostDTO {
+public class PostRequestDTO {
 
   @Data
   public static class CreatePost {
@@ -49,5 +49,4 @@ public class PostDTO {
     private String postContent;
 
   }
-
 }

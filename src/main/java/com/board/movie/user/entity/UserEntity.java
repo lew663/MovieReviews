@@ -18,11 +18,17 @@ public class UserEntity extends BaseEntity {
   @Id
   private String userId;
 
+  @Column(nullable = false)
   private String userPassword;
+
+  @Column(nullable = false)
   private String userNickname;
+
+  @Column(nullable = false)
   private String userName;
+
+  @Column(nullable = false)
   private String userPhone;
-  private String resetToken;
 
   @ManyToMany
   private Set<Role> roles;

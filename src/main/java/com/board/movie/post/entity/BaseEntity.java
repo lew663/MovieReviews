@@ -1,11 +1,7 @@
 package com.board.movie.post.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
@@ -15,11 +11,24 @@ import java.time.LocalDateTime;
 @Getter
 public class BaseEntity {
 
-  @CreationTimestamp
-  @Column(updatable = false)
+  @Column(updatable = false, nullable = false)
   private LocalDateTime postCreated;
 
-  @UpdateTimestamp
-  @Column(insertable = false)
+  @Column(updatable = false, nullable = false)
   private LocalDateTime postUpdated;
+
+  // 게시글 생성시 postCreated 와 postUpdated 를 현재시각으로 변경 Null 값 방지
+  @PrePersist
+  public void prePersist() {
+    LocalDateTime now = LocalDateTime.now();
+    if (postCreated == null) {
+      postCreated = now;
+    }
+    postUpdated = now;
+  }
+
+  @PreUpdate
+  public void preUpdate() {
+    postUpdated = LocalDateTime.now();
+  }
 }

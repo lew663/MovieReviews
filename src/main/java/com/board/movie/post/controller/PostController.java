@@ -3,7 +3,7 @@ package com.board.movie.post.controller;
 import com.board.movie.common.ApiResultDTO;
 import com.board.movie.common.SuccessResponse;
 import com.board.movie.config.security.UserDetailsImpl;
-import com.board.movie.post.dto.PostDTO;
+import com.board.movie.post.dto.PostRequestDTO;
 import com.board.movie.post.dto.PostResponseDTO;
 import com.board.movie.post.service.PostService;
 import jakarta.validation.Valid;
@@ -23,14 +23,14 @@ public class PostController {
 
   // 전체 게시글 조회
   @GetMapping("/posts")
-  public ApiResultDTO<List<PostResponseDTO>> listPosts() {
+  public ApiResultDTO<List<PostResponseDTO.listPosts>> listPosts() {
     return postService.listPosts();
   }
 
   // 게시글 작성
   @PostMapping("/post")
   public ApiResultDTO<PostResponseDTO> createPost(
-      @Valid @RequestBody PostDTO.CreatePost postDto,
+      @Valid @RequestBody PostRequestDTO.CreatePost postDto,
       @AuthenticationPrincipal UserDetailsImpl userDetails) {
     return postService.createPost(postDto, userDetails.getUser());
   }
@@ -39,7 +39,7 @@ public class PostController {
   @PutMapping("/post/{postId}")
   public ApiResultDTO<PostResponseDTO> updatePost(
       @PathVariable("postId") Long postId,
-      @Valid @RequestBody PostDTO.UpdatePost postDto,
+      @Valid @RequestBody PostRequestDTO.UpdatePost postDto,
       @AuthenticationPrincipal UserDetailsImpl userDetails) {
     return postService.updatePost(postId, postDto, userDetails.getUser());
   }
@@ -52,4 +52,10 @@ public class PostController {
     return postService.deletePost(postId, userDetails.getUser());
   }
 
+  // 선택한 게시물 조회
+  @GetMapping("/posts/{postId}")
+  public ApiResultDTO<PostResponseDTO> getPost(
+      @PathVariable("postId") Long postId) {
+    return postService.getPost(postId);
+  }
 }
