@@ -30,11 +30,9 @@ public class ScrapController {
   }
 
   // 스크랩 제거
-  @DeleteMapping("/{postId")
+  @DeleteMapping("/{postId}")
   public ApiResultDTO<SuccessResponse> deleteScrap(
       @PathVariable Long postId) {
     return scrapService.deleteScrap(postId);
   }
-
-
 }
